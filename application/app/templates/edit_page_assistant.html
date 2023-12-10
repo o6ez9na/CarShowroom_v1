@@ -1,0 +1,79 @@
+{% extends 'home.html' %}
+{% block content %}
+<h1>Амин.панель "Ассистены"</h1>
+{% if update %}
+<p class="mt-2">Страница редактирования</p>
+<p><a href="{%url 'edit_page_assistant' %}">Вернуться назад</a></p>
+<form id="update_form" method="post">
+  {% csrf_token %}
+  {{form}}
+</form>
+<button form="update_form" type="submit" class="btn btn-primary mt-2">Обновить</button>
+{%endif%}
+{%if not update%}
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Имя</th>
+      <th scope="col">Код автосалона</th>
+      <th scope="col">Телефон</th>
+      <th scope="col">Дата</th>
+      <th scope="col">КПД</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in list_params %}
+    <tr>
+      <td>{{i.id}}</td>
+      <td>{{i.name}}</td>
+      <td>{{i.id_car_showroom}}</td>
+      <td>{{i.phone}}</td>
+      <td>{{i.data_start}}</td>
+      <td>{{i.sales_count}}</td>
+      <td><a href="{% url 'update_page_assistant' i.id %}">Редактировать</a></td>
+      <td>
+        <form id="delete_assistant" action="{% url 'delete_assistant' i.id %}" method="post">{% csrf_token %}</form>
+        <a href="javascript:void()" onclick="delete_question()">Удалить</a></td>
+        <script>
+          function delete_question(){
+            if (confirm("Вы уверены?")){
+              document.getElementById('delete_assistant').submit()
+            }
+          }
+        </script>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{%endif%}
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+  Добавить ассистента
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Добавление</h5>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="add_form" method="post">
+          {% csrf_token %}
+          {{form}}
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+        <button form="add_form" type="submit" class="btn btn-primary">Добавить</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{%endblock%}

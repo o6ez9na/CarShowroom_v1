@@ -1,0 +1,11 @@
+{% extends 'home.html' %}
+{% block content %}
+
+
+<h1 class="mt-2">Дата продажи: {{sale_detail.data}}</h1>
+    <p><a href="/">Вурнуться назад</a></p>
+    <p>Код проданной машины: {{sale_detail.automobile_id}}</p>
+    <p>Тип оплаты: {{sale_detail.payment_type}}</p>
+    <p>Код ассистента: {{sale_detail.id_shop_assistant}}</p>
+</div>
+{%endblock%}

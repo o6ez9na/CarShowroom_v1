@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="container mt-2">
+        <ul class="nav nav-pills">
+            {% if request.user.is_authenticated %}
+            <li class="nav-item">
+                {% url 'car_s' as url_home %}
+                <a class="nav-link {% if url_home == request.path %}active{%endif%}" href="{{url_home}}">Автосалоны</a>
+            </li>
+            <li class="nav-item">
+                {% url 'auto' as url_auto %}
+                <a class="nav-link {% if url_auto == request.path %}active{%endif%}" href="{{url_auto}}">Авто</a>
+            </li>
+            <li class="nav-item">
+                {% url 'sale' as url_sale %}
+                <a class="nav-link {% if url_sale == request.path %}active{%endif%}" href="{{url_sale}}">Продажи</a>
+            </li>
+            <li class="nav-item">
+                {% url 'assistant' as url_assistant %}
+                <a class="nav-link {% if url_assistant == request.path %}active{%endif%}" href="{{url_assistant}}"
+                    href="#">Ассистенты</a>
+            </li>
+            <li class="nav-item">
+                {% url 'brands' as url_brands %}
+                <a class="nav-link {% if url_brands == request.path %}active{%endif%}" href="{{url_brands}}"
+                    href="#">Бренды</a>
+            </li>
+            <li class="nav-item">
+                {% url 'clients' as url_clients %}
+                <a class="nav-link {% if url_clients == request.path %}active{%endif%}"
+                    href="{{url_clients}}">Клиенты</a>
+            </li>
+
+            <li class="nav-item">
+                <form id="del_form" method="post" action="{%url 'logout_page'%}">
+                    {% csrf_token %}
+                    <button form="del_form" type="submit" class="btn btn-danger mx-5">Выйти</button>
+                </form>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-success">
+                    <a>Привет, {{request.user}}</a>
+                </button>
+            </li>
+            {%else%}
+            <li class="nav-item">
+                {% url 'login' as url_login %}
+                <a class="nav-link {% if url_login == request.path %}active{%endif%}" href="{{url_login}}">login</a>
+            </li>
+            <li class="nav-item">
+                {% url 'register' as url_register %}
+                <a class="nav-link {% if url_register == request.path %}active{%endif%}"
+                    href="{{url_register}}">register</a>
+            </li>
+            {%endif%}
+
+            
+        </ul>
+        {% block content %} {% endblock %}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

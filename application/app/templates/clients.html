@@ -1,0 +1,20 @@
+{% extends 'home.html' %}
+{% block content %}
+{%if request.user.username == 'admin' %}
+<ul class="nav nav-pills mt-2">
+    <li class="nav-item">
+        <a class="nav-link active" href="/edit_page/">Создание/Редактирование/Удаление</a>
+    </li>
+</ul>
+{% endif %}
+
+<h1 class="m-2">Клиенты</h1>
+{% for i in clients %}
+<ul class="list-group mt-4">
+    <li class="list-group-item">
+        <b class="mx-2">{{i.first_name}}</b>
+        <span class="float-end mx-3"><a href="/clients_details/{{i.id}}">перейти</a></span>
+    </li>
+</ul>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'home.html' %}
+{% block content %}
+<h1 class="mt-2">Код автомобиля: {{auto_detail.id_car_showroom}}</h1>
+    <p><a href="/">Вурнуться назад</a></p>
+    <p>Код бренда: {{auto_detail.brand_id}}</p>
+    <p>Рейтинг: {{auto_detail.rating}}</p>
+    <p>Цена: {{auto_detail.price}}</p>
+    <p>Цвет: {{auto_detail.color}}</p>
+    <p>Номер трансмиссии: {{auto_detail.transmit_number}}</p>
+</div>
+{%endblock%}

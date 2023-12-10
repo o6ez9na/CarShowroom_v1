@@ -1,0 +1,8 @@
+{% extends 'home.html' %}
+{% block content %}
+
+<h1 class="mt-2">{{clients_details.first_name}}</h1>
+    <p>Номер телефона: {{clients_details.phone}}</p>
+    <p>Описание: {{clients_details.description}}</p>
+</div>
+{%endblock%}
